@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class Kontrolleri {
 
     @RequestMapping("testi")
-    public String heiSpring() {
+    public String heijaSpring() {
         System.out.println("Heippa!");
         return "index.jsp";
     }
