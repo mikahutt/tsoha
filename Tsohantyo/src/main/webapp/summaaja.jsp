@@ -8,6 +8,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Tervetuloa oluiden ihmeelliseen maailmaan! ${viesti}</h1>
+        <h1>Parametrien summa on: ${viesti}</h1>
     </body>
 </html>
