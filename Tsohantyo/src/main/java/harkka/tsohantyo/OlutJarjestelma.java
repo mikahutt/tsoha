@@ -4,6 +4,7 @@
  */
 package harkka.tsohantyo;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class OlutJarjestelma implements OlutPalvelu{
     private List<Olut> olutLista;
-
+    
+    public OlutJarjestelma() {
+        this.olutLista = new ArrayList<Olut>();
+    }
+    
     @Override
     public Olut lisaaOlut(Olut olut) {
         olutLista.add(olut);

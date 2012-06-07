@@ -15,22 +15,29 @@ public class Kontrolleri {
 
     @Autowired
     private OlutPalvelu olutPalvelu;
-
+    
+    @RequestMapping("*")
+    public String oletukseltaHimaan() {
+        return "index";
+    }
+    
     @RequestMapping(method = RequestMethod.GET, value = "olut")
     public String listaaOluet(Model model) {
         model.addAttribute("oluet", olutPalvelu.listaaOluet());
-        return "listaus.jsp";
+        model.addAttribute("olut", new Olut());
+        return "listaus";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "olut/{olutId}")
     public String naytaOlut(Model model, @PathVariable Integer olutId) {
         model.addAttribute("olut", olutPalvelu.annaOlut(olutId));
-        return "olutnakyma.jsp";
+        return "olutnakyma";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "olut")
-    public String lisaaOlut(@ModelAttribute Olut olut) {
+    public String lisaaOlut(@ModelAttribute("olut") Olut olut) {
         olut = olutPalvelu.lisaaOlut(olut);
+        System.out.println("Luotiin olut: " + olut);
         return "redirect:/olut/" + olut.getId(); // luotu olut
     }
 
@@ -60,14 +67,14 @@ public class Kontrolleri {
 
 
         model.addAttribute("viesti", kaynteja);
-        return "index.jsp";
+        return "index";
     }
 
     @RequestMapping("summaa")
     public String summaaArvot(@RequestParam Integer eka, @RequestParam Integer toka, Model model) {
         System.out.println("Summa: " + (eka + toka));
         model.addAttribute("viesti", (eka + toka));
-        return "summaaja.jsp";
+        return "summaaja";
     }
 
     //@RequestMapping(value="osoite", method=RequestMethod.POST)
@@ -76,6 +83,6 @@ public class Kontrolleri {
         System.out.println("Henkilön nimi: " + kayttaja.getNimi());
         System.out.println("Henkilön salasana: " + kayttaja.getSalasana());
 
-        return "ilmoittautuminen.jsp";
+        return "ilmoittautuminen";
     }
 }
