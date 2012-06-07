@@ -6,6 +6,8 @@ package harkka.tsohantyo;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,6 +17,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class OlutJarjestelma implements OlutPalvelu{
     private List<Olut> olutLista;
+    
+    @Autowired
+    @Qualifier("lista")
+    private OlutDao olutdao;
     
     public OlutJarjestelma() {
         this.olutLista = new ArrayList<Olut>();

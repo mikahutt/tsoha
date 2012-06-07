@@ -7,7 +7,7 @@
         <title>Oluen tiedot</title>
     </head>
     <body>
-        <p>Ei Yht‰‰n oluita lis‰tty kun et s‰ sit‰ osaa tehd‰ </p>
+        <p>Lis‰‰ olut j‰rjestelm‰‰n</p>
         <form:form commandName="olut" action="${pageContext.request.contextPath}/olut" method="POST">
             Id: <form:input path="id" />
             Name: <form:input path="name" />
