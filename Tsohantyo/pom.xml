@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>wad</groupId>
+    <groupId>harkka</groupId>
     <artifactId>Tsohantyo</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -83,6 +83,12 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-acl</artifactId>
             <version>${spring-version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-tx</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         
         
@@ -201,9 +207,10 @@
         
         <!-- mysql -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.18</version>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>8.4-702.jdbc3</version>
+            <classifier/>
         </dependency>
             
         <!-- loggauskirjastot -->
@@ -284,6 +291,12 @@
             </exclusions>
         </dependency>
         
+        <!-- jetty for he-ro-kuuu -->
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+            <version>7.6.0.v20120127</version>
+        </dependency>
     </dependencies>
 
     <repositories>
@@ -317,16 +330,70 @@
         </repository>
     </repositories>
 
+    <!-- he-ro-kuu -->
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.0.2</version>
+                <version>2.3.2</version>
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
+                    <compilerArguments>
+                        <endorseddirs>${endorsed.dir}</endorseddirs>
+                    </compilerArguments>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.1.1</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <id>create-jetty-runner-for-me</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.mortbay.jetty</groupId>
+                                    <artifactId>jetty-runner</artifactId>
+                                    <version>7.5.4.v20111024</version>
+                                    <destFileName>jetty-runner.jar</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${endorsed.dir}</outputDirectory>
+                            <silent>true</silent>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>javax</groupId>
+                                    <artifactId>javaee-endorsed-api</artifactId>
+                                    <version>6.0</version>
+                                    <type>jar</type>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

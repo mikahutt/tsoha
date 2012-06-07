@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" 
+	     xmlns="http://java.sun.com/xml/ns/persistence" 
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	     xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+				 http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="persistenceUnitEclipseLink" transaction-type="RESOURCE_LOCAL">
+    <-- käytetty JPA-toteutus //-->
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+    <-- käytetylle JPA-toteutukselle annettavat parametrit //-->
+    <properties>
+      <property name="showSql" value="true"/>
+      <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+      <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+      <property name="eclipselink.weaving" value="false"/>
+      <property name="eclipselink.logging.level" value="FINE"/>
+    </properties>
+
+    <-- hallinnoitavat entiteettiluokat //-->
+    <class>harkka.tsohantyo.domain.Olut</class>
+  </persistence-unit>
+</persistence>

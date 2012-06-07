@@ -114,11 +114,11 @@ public class Kontrolleri {
         }
 
         //@RequestMapping(value="osoite", method=RequestMethod.POST)
-        @RequestMapping("osoite")
-        public String osallistuminen(@ModelAttribute Kayttaja kayttaja) {
-            System.out.println("Henkilön nimi: " + kayttaja.getNimi());
-            System.out.println("Henkilön salasana: " + kayttaja.getSalasana());
-
-            return "ilmoittautuminen";
-        }
+//        @RequestMapping("osoite")
+//        public String osallistuminen(@ModelAttribute Kayttaja kayttaja) {
+//            System.out.println("HenkilÃ¶n nimi: " + kayttaja.getNimi());
+//            System.out.println("HenkilÃ¶n salasana: " + kayttaja.getSalasana());
+//
+//            return "ilmoittautuminen";
+//        }
     }

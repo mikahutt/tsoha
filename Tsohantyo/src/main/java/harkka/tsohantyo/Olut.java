@@ -5,20 +5,19 @@
 package harkka.tsohantyo;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * 
  * @author MH
  */
-@Entity
+@Entity(name="OLUT")
 public class Olut implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name="ID")
     private int id;
+    @Column(name="NIMI", nullable=false)
     private String name;
 
     public Olut() {
